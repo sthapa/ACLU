@@ -47,3 +47,6 @@ jobs:
       - run: 
           working_directory: ~/repo/frontend-v2
           command: npm run lint
+      - run: 
+          working_directory: ~/repo/frontend-v2
+          command: npm audit
