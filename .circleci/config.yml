@@ -23,8 +23,6 @@ jobs:
     steps:
       - checkout
 
-      - run: cd frontend-v2
-
       # Download and cache dependencies
       - restore_cache:
           keys:
@@ -32,15 +30,23 @@ jobs:
             # fallback to using the latest cache if no exact match is found
             - v1-dependencies-
       
-      - run: npm install
+      - run: 
+          working_directory: ~/repo/frontend-v2
+          command: npm install
 
-      - run: npm build
+      - run: 
+          working_directory: ~/repo/frontend-v2
+          command: npm build
 
       - save_cache:
           paths:
-            - node_modules
+            - frontend-v2/node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
 
       # run tests!
-      - run: npm run lint
-      - run: yarn test
+      - run: 
+          working_directory: ~/repo/frontend-v2
+          command: npm run lint
+      - run: 
+          working_directory: ~/repo/frontend-v2
+          command: yarn test
