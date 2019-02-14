@@ -26,9 +26,9 @@ jobs:
       # Download and cache dependencies
       - restore_cache:
           keys:
-            - v1-dependencies-{{ checksum "frontend-v2/package.json" }}
+            - node11.6-dependencies-{{ checksum "frontend-v2/package.json" }}
             # fallback to using the latest cache if no exact match is found
-            - v1-dependencies-
+            - node11.6-dependencies-
       
       - run: 
           working_directory: ~/repo/frontend-v2
@@ -41,12 +41,9 @@ jobs:
       - save_cache:
           paths:
             - frontend-v2/node_modules
-          key: v1-dependencies-{{ checksum "frontend-v2/package.json" }}
+          key: node11.6-dependencies-{{ checksum "frontend-v2/package.json" }}
 
       # run tests!
       - run: 
           working_directory: ~/repo/frontend-v2
           command: npm run lint
-      - run: 
-          working_directory: ~/repo/frontend-v2
-          command: yarn test
